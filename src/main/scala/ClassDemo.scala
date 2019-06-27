@@ -16,7 +16,7 @@ class ClassDemo {
 
 }
 
-object ClassTest{
+object ClassDemo{
   def main(args: Array[String]): Unit = {
     val demo = new ClassDemo
     println(demo.name)
