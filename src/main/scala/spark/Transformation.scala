@@ -10,13 +10,19 @@ import scala.collection.mutable.ListBuffer
   */
 object Transformation {
 
+  /**
+    * 本地模式
+    * local 只启动一个excutor
+    * local[n] 启动n个excutor
+    * local[*] 启动与cpu个数相同的excutor
+    */
   private val conf:SparkConf = new SparkConf().setAppName("TestTransformation").setMaster("local")
 
   private val sc:SparkContext = new SparkContext(conf)
 
   def main(args: Array[String]): Unit = {
 
-//    map()
+    map()
 //    mapPartitions()
 //    mapPartitionsWithIndex()
 
@@ -33,7 +39,7 @@ object Transformation {
 //    coalesce()
 //    cogroup()
 //    sortByKey()
-    aggregateByKey()
+//    aggregateByKey()
   }
 
   def map(): Unit ={
@@ -41,6 +47,7 @@ object Transformation {
     val listRdd = sc.parallelize(list)
     val nameRdd = listRdd.map(name => "hello "+name)
     nameRdd.foreach(name =>println(name))
+    println("分区数："+listRdd.getNumPartitions)
   }
 
   //传入整个RDD
